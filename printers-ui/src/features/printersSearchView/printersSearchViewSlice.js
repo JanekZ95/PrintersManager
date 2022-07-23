@@ -1,14 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  printers: [
-    {
-      modelName: "LOL",
-      manufacturer: "LOL 2",
-    },
-  ],
+  printers: [],
   searchQuery: "",
   isLoading: false,
+  errorMessage: "",
+  pageInfo: {
+    currentPage: 1,
+    pageSize: 50,
+  },
+  selectedPrinter: {},
+  successPopupVisible: false,
 };
 
 const printersSlice = createSlice({
@@ -25,6 +27,18 @@ const printersSlice = createSlice({
       state.isLoading = false;
       state.printers = action.payload;
     },
+    setErrorMessage(state, action) {
+      state.errorMessage = action.payload;
+    },
+    setPrinterDetails(state, action) {
+      state.selectedPrinter = action.payload;
+    },
+    showSuccess(state) {
+      state.successPopupVisible = true;
+    },
+    hideSuccess(state) {
+      state.successPopupVisible = false;
+    },
   },
 });
 
@@ -32,6 +46,18 @@ export const selectPrinters = (state) => state.printersSearch.printers;
 
 export const selectSearchQuery = (state) => state.printersSearch.searchQuery;
 
-export const { setSearchQuery, fetchPrinters, setPrinters } =
-  printersSlice.actions;
+export const selectPageInfo = (state) => state.printersSearch.pageInfo;
+
+export const selectPrinterDetails = (state) =>
+  state.printersSearch.selectedPrinter;
+
+export const {
+  setSearchQuery,
+  fetchPrinters,
+  setPrinters,
+  setErrorMessage,
+  setPrinterDetails,
+  showSuccess,
+  showPrinterDetails,
+} = printersSlice.actions;
 export default printersSlice.reducer;

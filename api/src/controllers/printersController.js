@@ -4,6 +4,7 @@ export const getPrinters = async (req, res, next) => {
     const request = req.query;
     const page = parseInt(request.page) ?? 1;
     const pageSize = parseInt(request.pageSize) ?? 0;
+    const searchQuery = request.query;
 
     try {
         if (page < 1 || pageSize < 0) {
@@ -11,7 +12,12 @@ export const getPrinters = async (req, res, next) => {
         } else {
             const printers =
         pageSize > 0
-            ? await Printer.find({})
+            ? await Printer.find({
+                modelName: {
+                    $regex: searchQuery,
+                    $options: 'i',
+                },
+            })
                 .select(' _id modelName manufacturer')
                 .skip(pageSize * (page - 1))
                 .limit(pageSize)
