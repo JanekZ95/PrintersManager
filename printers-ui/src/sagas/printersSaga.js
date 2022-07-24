@@ -1,4 +1,4 @@
-import { call, put, select, throttle } from "redux-saga/effects";
+import { call, put, select, takeEvery, throttle } from "redux-saga/effects";
 import {
   setPrinters,
   setErrorMessage,
@@ -64,9 +64,9 @@ function* deletePrinter(action) {
 
 function* printersSaga() {
   yield throttle(500, fetchPrinters().type, fetchAllPrinters);
-  yield throttle(500, "PRINTER_DETAILS_REQUESTED", fetchPrinterDetails);
+  yield takeEvery("PRINTER_DETAILS_REQUESTED", fetchPrinterDetails);
   // yield throttle(500, fetchPrinters().type, createPrinter);
-  // yield throttle(500, fetchPrinters().type, updatePrinter);
+  yield takeEvery("PAGE_DETAILS_SAVED", updatePrinter);
   // yield throttle(500, fetchPrinters().type, deletePrinter);
 }
 

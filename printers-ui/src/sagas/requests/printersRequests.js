@@ -1,7 +1,7 @@
 import axios from "axios";
 
 axios.defaults.headers.common["Authorization"] =
-  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mbyI6eyJ1c2VybmFtZSI6IkNodWpvd3lIdWJpMiIsInJvbGUiOiJVc2VyIn0sImlhdCI6MTY1ODU5NDIzNCwiZXhwIjoxNjU4NTk3ODM0fQ.uWna9rfwNzR8vEnkpb2mCIIlw9unOpSQni-5bpWrExU";
+  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mbyI6eyJ1c2VybmFtZSI6IkNodWpvd3lIdWJpMiIsInJvbGUiOiJVc2VyIn0sImlhdCI6MTY1ODY3MzgzMywiZXhwIjoxNjU4Njc3NDMzfQ.ahTU0oCZ3lpiG6IAfFl9LnrOYM64j3WWEPnyO8BMFzw";
 
 export const getAllPrinters = async ({
   currentPage,

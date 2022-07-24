@@ -33,14 +33,15 @@ export const PrinterDetailsPopup = ({ visible, printer }) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    dispatch(
-      updatePrinterDetails({
+    dispatch({
+      type: "PAGE_DETAILS_SAVED",
+      payload: {
         modelName,
         manufacturer,
         isDuplex,
         isLaser,
-      })
-    );
+      },
+    });
   };
 
   return (
@@ -74,7 +75,6 @@ export const PrinterDetailsPopup = ({ visible, printer }) => {
           <label for="isDuplex"> Is Duplex</label>
           <input type="radio" value={isLaser} name="isLaser" />
           <label for="isLaser" onChange={(e) => setIsLaser(e.target.value)}>
-            {" "}
             Is Laser
           </label>
           <br />
