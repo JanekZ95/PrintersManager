@@ -5,7 +5,7 @@ import { showPrinterDetails } from "../../features/printersSearchView/printersSe
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  padding: 20px;
   gap: 5px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   cursor: pointer;
