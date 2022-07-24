@@ -7,7 +7,7 @@ const initialState = {
   errorMessage: "",
   pageInfo: {
     currentPage: 1,
-    pageSize: 50,
+    pageSize: 30,
   },
   selectedPrinter: {},
   successPopupVisible: false,
