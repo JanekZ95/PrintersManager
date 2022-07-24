@@ -10,6 +10,13 @@ export const getPrinters = async (req, res, next) => {
         if (page < 1 || pageSize < 0) {
             res.status(400).send();
         } else {
+            const printersCount = await Printer.count({
+                modelName: {
+                    $regex: searchQuery,
+                    $options: 'i',
+                },
+            });
+
             const printers =
         pageSize > 0
             ? await Printer.find({
@@ -23,7 +30,16 @@ export const getPrinters = async (req, res, next) => {
                 .limit(pageSize)
             : [];
 
-            res.status(200).json(printers ?? []);
+            res.status(200).json(
+                {
+                    printers,
+                    pageInfo: {
+                        currentPage: page,
+                        pageSize,
+                        totalPages: Math.ceil(printersCount / pageSize),
+                    },
+                } ?? []
+            );
         }
     } catch (error) {
         next(error);
@@ -83,10 +99,8 @@ export const updatePrinter = async (req, res, next) => {
         if (!printer) {
             res.status(404).send();
         } else {
-            const updatedPrinter = await Printer.findOneAndUpdate(
-                { _id: id },
-                printerToUpdate
-            );
+            await Printer.updateOne({ _id: id }, printerToUpdate);
+            const updatedPrinter = await Printer.findOne({ _id: id });
             res.status(200).json({
                 id: updatedPrinter._id,
                 modelName: updatedPrinter.modelName,

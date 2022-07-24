@@ -7,17 +7,15 @@ import {
   selectSearchQuery,
   setPrinterDetails,
   showSuccess,
-  showPrinterDetails,
 } from "../features/printersSearchView/printersSearchViewSlice";
 
 import * as Api from "./requests/printersRequests";
 
 function* fetchAllPrinters(action) {
   try {
-    const pageInfo = yield select(selectPageInfo);
     const searchQuery = yield select(selectSearchQuery);
     const printers = yield call(Api.getAllPrinters, {
-      ...pageInfo,
+      ...action.payload.pageInfo,
       searchQuery,
     });
     yield put(setPrinters(printers));
@@ -66,7 +64,7 @@ function* printersSaga() {
   yield throttle(500, fetchPrinters().type, fetchAllPrinters);
   yield takeEvery("PRINTER_DETAILS_REQUESTED", fetchPrinterDetails);
   // yield throttle(500, fetchPrinters().type, createPrinter);
-  yield takeEvery("PAGE_DETAILS_SAVED", updatePrinter);
+  yield takeEvery("PRINTER_DETAILS_SAVED", updatePrinter);
   // yield throttle(500, fetchPrinters().type, deletePrinter);
 }
 

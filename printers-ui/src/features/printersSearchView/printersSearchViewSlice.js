@@ -7,10 +7,11 @@ const initialState = {
   errorMessage: "",
   pageInfo: {
     currentPage: 1,
-    pageSize: 30,
+    pageSize: 10,
   },
   selectedPrinter: {},
   successPopupVisible: false,
+  token: "",
 };
 
 const printersSlice = createSlice({
@@ -25,7 +26,9 @@ const printersSlice = createSlice({
     },
     setPrinters(state, action) {
       state.isLoading = false;
-      state.printers = action.payload;
+      console.log(action.payload);
+      state.printers = action.payload.printers;
+      state.pageInfo = action.payload.pageInfo;
     },
     setErrorMessage(state, action) {
       state.errorMessage = action.payload;
@@ -38,6 +41,23 @@ const printersSlice = createSlice({
     },
     hideSuccess(state) {
       state.successPopupVisible = false;
+    },
+    setPrinter(state, action) {
+      state.printers = state.printers.map((printer) =>
+        printer._id === action.payload._id
+          ? {
+              ...printer,
+              modelName: action.payload.modelName,
+              manufacturer: action.payload.manufacturer,
+            }
+          : printer
+      );
+    },
+    changePage(state, action) {
+      state.pageInfo.currentPage = action.payload;
+    },
+    setToken(state, action) {
+      state.token = action.payload;
     },
   },
 });
@@ -59,5 +79,8 @@ export const {
   setPrinterDetails,
   showSuccess,
   showPrinterDetails,
+  setPrinter,
+  changePage,
+  setToken,
 } = printersSlice.actions;
 export default printersSlice.reducer;
