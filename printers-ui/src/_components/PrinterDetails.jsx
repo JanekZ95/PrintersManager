@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { printersActions } from "_store/printers.slice";
 import { Popup } from "./common/Popup";
 
-const FormContainer = styled.form`
+const FormsContainer = styled.form`
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -53,7 +53,7 @@ export const PrinterDetails = ({ printerDetails, create }) => {
 
   return (
     <Popup>
-      <FormContainer onSubmit={handleSubmit}>
+      <FormsContainer onSubmit={handleSubmit}>
         <label htmlFor="modelName">Model</label>
         <input
           type="text"
@@ -91,7 +91,7 @@ export const PrinterDetails = ({ printerDetails, create }) => {
         <button type="submit">Submit</button>
         {!create && <button onClick={handleDelete}>Delete</button>}
         <button onClick={handleClose}>Close</button>
-      </FormContainer>
+      </FormsContainer>
     </Popup>
   );
 };

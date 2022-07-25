@@ -6,13 +6,34 @@ import { PrinterListItem } from "./PrinterListItem";
 const PrintersListContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 7px;
+  width: 33em;
+  margin 0 auto;
+  font-size: 18px;
+  cursor: pointer;
 `;
 
 const AddButton = styled.button`
   padding: 5px;
-  border: 1px solid black;
+  border: none;
   cursor: pointer;
+  width: 33em;
+  margin 0 auto;
+  border: none;
+	font-size: 18px;
+	background: #7eaa86;
+	border-radius: 5px;
+	cursor: pointer;
+	color: #fff;
+	transition: 0.3s;
+	text-shadow: 4px 0px 6px rgba(66, 68, 90, 1);
+	&:hover {
+		border: none;
+		background: #9ec9a6;
+		color: #fff;
+		text-shadow: 4px 0px 6px rgba(66, 68, 90, 1);
+		transition-timing-function: ease-in-out;
+		transition: 0.3s;
 `;
 
 export const PrintersList = ({ printers }) => {
