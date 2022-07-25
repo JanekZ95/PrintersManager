@@ -1,30 +1,45 @@
-import React from "react";
-import { BrowserRouter, Route, Routes, Switch } from "react-router-dom";
-import styled from "styled-components";
-import { LoginView } from "./views/loginView/LoginView";
-import { PrintersSearchView } from "./views/printersSearchView/PrintersSearchView";
+import React from 'react';
+import {
+    Navigate,
+    Route,
+    Routes,
+    useLocation,
+    useNavigate,
+} from 'react-router-dom';
+import styled from 'styled-components';
+import { Nav } from '_components/Nav';
+import { PrivateRoute } from '_components/PrivateRoute';
+import { history } from '_helpers/history';
+import { Home } from '_pages/home/Home';
+import { Login } from '_pages/login/Login';
 
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
+const AppContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr minmax(200px, 3fr) 1fr;
+  grid-template-rows: 50px 1fr;
 `;
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Container>
-              <PrintersSearchView />
-            </Container>
-          }
-        />
-        <Route path="/login" element={<LoginView />} />
-      </Routes>
-    </BrowserRouter>
-  );
+    history.navigate = useNavigate();
+    history.location = useLocation();
+
+    return (
+        <AppContainer>
+            <Nav />
+            <Routes>
+                <Route
+                    path="/"
+                    element={
+                        <PrivateRoute>
+                            <Home />
+                        </PrivateRoute>
+                    }
+                />
+                <Route path="/login" element={<Login />} />
+                <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
+        </AppContainer>
+    );
 }
 
 export default App;
