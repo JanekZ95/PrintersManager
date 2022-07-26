@@ -8,8 +8,11 @@ import { printersActions } from "_store/printers.slice";
 const MessageContainer = styled.div`
   display: flex;
   flex-direction: column;
+  display: flex;
   align-items: center;
+  justify-content: center;
   gap: 20px;
+  margin-top: 7em;
 `;
 
 const Message = styled.p`
@@ -18,10 +21,21 @@ const Message = styled.p`
 `;
 
 const CloseButton = styled.button`
-  align-self: flex-end;
-  padding: 2px 4px;
-  border: 1px solid black;
-  cursor: pointer;
+border: 2px solid #7eaa86;
+width: 8em;
+font-size: 18px;
+background: #fff;
+border-radius: 20px;
+padding: 5px 20px;
+cursor: pointer;
+margin-top: 4em;
+&:hover {
+  border: 2px solid #9ec9a6;
+  background: #9ec9a6;
+  color: black;
+  text-shadow: none;
+  transition-timing-function: ease-in-out;
+transition: 0.3s;
 `;
 
 export const MessagePopup = ({ type, message }) => {

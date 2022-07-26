@@ -13,7 +13,7 @@ const Input = styled.input`
 	box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
 	padding: 10px 0;
 	outline-style: none;
-	background: #eeeeee;
+	background-color: #fff;
 	width: 20em;
 	font-size: 20px;
 `;

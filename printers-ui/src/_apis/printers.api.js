@@ -15,13 +15,14 @@ async function getPrinters({ query, currentPage, pageSize }) {
 
     return {
         ...response,
-        printers: response.printers?.map((p) => {
-            return {
-                id: p._id,
-                modelName: p.modelName,
-                manufacturer: p.manufacturer,
-            };
-        }) ?? [],
+        printers:
+      response.printers?.map((p) => {
+          return {
+              id: p._id,
+              modelName: p.modelName,
+              manufacturer: p.manufacturer,
+          };
+      }) ?? [],
     };
 }
 
