@@ -9,7 +9,7 @@ export const signIn = async (req, res, next) => {
 
     try {
         const user = await User.findOne({ username });
-        if (!user || user.password != password) {
+        if (!username || !password || !user || user.password != password) {
             res.status(401).send('Invalid username or password');
         } else {
             const token = jwt.sign(

@@ -1,18 +1,44 @@
-import React from "react";
-import styled from "styled-components";
-import { PrintersSearchView } from "./views/printersSearchView/PrintersSearchView";
+import React from 'react';
+import {
+    Navigate,
+    Route,
+    Routes,
+    useLocation,
+    useNavigate,
+} from 'react-router-dom';
+import styled from 'styled-components';
+import { Nav } from '_components/Nav';
+import { PrivateRoute } from '_components/PrivateRoute';
+import { history } from '_helpers/history';
+import { Home } from '_pages/home/Home';
+import { Login } from '_pages/login/Login';
 
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
+const AppContainer = styled.div`
+  height: 100vh;
+  background: #eeeeee;
 `;
 
 function App() {
-  return (
-    <Container>
-      <PrintersSearchView />
-    </Container>
-  );
+    history.navigate = useNavigate();
+    history.location = useLocation();
+
+    return (
+        <AppContainer>
+            <Nav />
+            <Routes>
+                <Route
+                    path="/"
+                    element={
+                        <PrivateRoute>
+                            <Home />
+                        </PrivateRoute>
+                    }
+                />
+                <Route path="/login" element={<Login />} />
+                <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
+        </AppContainer>
+    );
 }
 
 export default App;
