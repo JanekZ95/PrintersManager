@@ -6,36 +6,40 @@ dotenv.config();
 
 export const signUp = async (req, res, next) => {
     const { username, password } = req.body;
+    
+    if(!username || !password) {
+        res.status(400).send(`Username and password cannot be empty`); 
+    } else {
+        try {
+            const existingUser = await User.findOne({ username });
 
-    try {
-        const existingUser = await User.findOne({ username });
+            if (existingUser) {
+                res.status(400).send(`Username ${username} already exists`);
+            } else {
+                const user = await User.create({
+                    username,
+                    password,
+                    role: 'User',
+                });
 
-        if (existingUser) {
-            res.status(400).send(`Username ${username} already exists`);
-        } else {
-            const user = await User.create({
-                username,
-                password,
-                role: 'User',
-            });
-
-            const token = jwt.sign(
-                {
-                    userInfo: {
-                        username: user.username,
-                        role: user.role,
+                const token = jwt.sign(
+                    {
+                        userInfo: {
+                            username: user.username,
+                            role: user.role,
+                        },
                     },
-                },
-                process.env.TOKEN_SECRET,
-                { expiresIn: '1h' }
-            );
+                    process.env.TOKEN_SECRET,
+                    { expiresIn: '1h' }
+                );
 
-            res.status(200).json({
-                username,
-                token,
-            });
+                res.status(200).json({
+                    username,
+                    token,
+                });
+            }
+        } catch (err) {
+            next(err);
         }
-    } catch (err) {
-        next(err);
     }
 };
