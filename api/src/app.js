@@ -9,7 +9,7 @@ import { logRequests } from './middlewares/loggingMiddleware.js';
 import cors from 'cors';
 
 const app = express();
-const port = 9000;
+const port = process.env.PORT;
 dotenv.config();
 
 app.use(cors());
