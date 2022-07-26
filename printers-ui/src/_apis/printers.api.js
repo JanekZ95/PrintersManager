@@ -1,4 +1,4 @@
-const { axiosWrapper } = require('_helpers/axios-wrapper');
+import { axiosWrapper } from '_helpers/axios-wrapper';
 
 export const Api = {
     getPrinters,

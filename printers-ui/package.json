@@ -28,11 +28,6 @@
     "prettier:fix": "npm run prettier -- --write",
     "format": "npm run prettier:fix && npm run lint:fix"
   },
-  "devDependencies": {
-    "eslint": "^8.20.0",
-    "eslint-config-prettier": "^8.5.0",
-    "prettier": "2.7.1"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
