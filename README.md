@@ -2,4 +2,4 @@
 
 Visit:
 
-https://printers-manager-ui.herokuapp.com/
+https://printers-manager-ui.herokuapp.com/login
